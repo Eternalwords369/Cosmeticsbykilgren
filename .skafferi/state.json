@@ -1,0 +1,42 @@
+{
+  "currentPhase": 1,
+  "completedPhases": [0],
+  "decisions": [
+    {
+      "phase": 0,
+      "decision": "Next.js 16.4.3 i stället för 14/15",
+      "reason": "npm audit flaggar alla Next 15-versioner (critical). Tech-stack säger 14+ och 0 high/critical. Next 16 byter middleware mot proxy.ts och slår på cacheComponents + partialPrefetching som default; vi behåller dem. Sessionsläsning måste ligga bakom <Suspense>."
+    },
+    {
+      "phase": 0,
+      "decision": "Prisma 7.10.1 med driver adapter (@prisma/adapter-pg)",
+      "reason": "Senaste stabila (8.x är RC). Prisma 7 kräver generator 'prisma-client' med output (lib/generated/prisma) och datasource-URL i prisma.config.ts i stället för i schemat. Modellerna är i övrigt exakt enligt data-model.md, utan @map."
+    },
+    {
+      "phase": 0,
+      "decision": "NextAuth v4 (4.24.15), JWT-session, Credentials",
+      "reason": "Stabil och stödjer Next 16. v5 är fortfarande beta. Skydd i två lager: proxy.ts (optimistisk) + getServerSession i sidan."
+    },
+    {
+      "phase": 0,
+      "decision": "shadcn: radix-nova, neutral, CSS-variabler. sonner i stället för toast, field i stället för form",
+      "reason": "toast och form finns inte längre i shadcn-registret; sonner och field är ersättarna."
+    },
+    {
+      "phase": 0,
+      "decision": "Typsnitt: Geist (brödtext) + Fraunces (rubriker)",
+      "reason": "Fraunces ger en varm, jordnära rubrikton som passar varumärket; Geist håller UI-texten neutral."
+    },
+    {
+      "phase": 0,
+      "decision": "Stripe, Resend och SMS i mock-läge",
+      "reason": "Inga nycklar fanns vid Fas 0 och ingen av tjänsterna används förrän Fas 2–3."
+    },
+    {
+      "phase": 0,
+      "decision": "Seed: fiktiva producenter, admin från SEED_ADMIN_EMAIL/SEED_ADMIN_PASSWORD",
+      "reason": "Inga riktiga producenter godkända ännu. Lösenord hårdkodas aldrig."
+    }
+  ],
+  "lastUpdated": "2026-10-24T12:35:00Z"
+}
