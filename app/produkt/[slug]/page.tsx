@@ -3,11 +3,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CatalogImage } from "@/components/catalog/catalog-image";
 import { ProductGrid } from "@/components/catalog/product-card";
-import { StockBadge } from "@/components/catalog/stock-badge";
+import { StockStatus } from "@/components/catalog/stock-status";
 import { Story } from "@/components/content/story";
 import { Breadcrumbs } from "@/components/layout/breadcrumbs";
 import { JsonLd } from "@/components/seo/json-ld";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { getProductBySlug, getProductSlugs, getRelatedProducts } from "@/lib/catalog";
 import { sv } from "@/lib/copy/sv";
@@ -81,10 +80,12 @@ export default async function ProductPage({ params }: PageProps<"/produkt/[slug]
           <h1 className="mt-1 font-heading text-3xl font-semibold tracking-tight sm:text-4xl">
             {product.name}
           </h1>
-          <div className="mt-3 flex flex-wrap gap-2">
-            <StockBadge stock={product.stock} showInStock />
-            {product.isSeasonal ? <Badge variant="outline">{sv.product.seasonal}</Badge> : null}
-          </div>
+          <p className="mt-2 text-sm">
+            <StockStatus stock={product.stock} showInStock />
+            {product.isSeasonal ? (
+              <span className="text-muted-foreground"> · {sv.product.seasonal}</span>
+            ) : null}
+          </p>
 
           <p className="mt-6">
             <span className="text-3xl font-semibold" data-testid="product-price">

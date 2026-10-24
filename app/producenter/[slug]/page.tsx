@@ -5,7 +5,6 @@ import { ProductGrid } from "@/components/catalog/product-card";
 import { Story } from "@/components/content/story";
 import { Breadcrumbs } from "@/components/layout/breadcrumbs";
 import { JsonLd } from "@/components/seo/json-ld";
-import { Badge } from "@/components/ui/badge";
 import { getProducerBySlug, getProducerSlugs, getProducts } from "@/lib/catalog";
 import { sv } from "@/lib/copy/sv";
 import { absoluteUrl, breadcrumbJsonLd, producerJsonLd } from "@/lib/seo";
@@ -66,9 +65,9 @@ export default async function ProducerPage({ params }: PageProps<"/producenter/[
             <h1 className="font-heading text-4xl font-semibold tracking-tight">{producer.name}</h1>
             <p className="mt-3 text-xl text-muted-foreground">{producer.shortDescription}</p>
             {producer.stationNumber ? (
-              <Badge variant="secondary" className="mt-4">
+              <p className="mt-3 text-sm text-muted-foreground">
                 {sv.producers.station(producer.stationNumber)}
-              </Badge>
+              </p>
             ) : null}
             <div className="mt-8">
               <Story>{producer.longStory}</Story>

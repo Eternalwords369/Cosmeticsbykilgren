@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { CatalogImage } from "@/components/catalog/catalog-image";
-import { StockBadge } from "@/components/catalog/stock-badge";
-import { Badge } from "@/components/ui/badge";
+import { StockStatus } from "@/components/catalog/stock-status";
 import type { CatalogProduct } from "@/lib/catalog";
 import { sv } from "@/lib/copy/sv";
 import { formatSek } from "@/lib/money";
@@ -22,17 +21,12 @@ export function ProductCard({ product }: { product: CatalogProduct }) {
             soldOut && "opacity-60",
           )}
         />
-        <div className="absolute left-2 top-2 flex flex-wrap gap-1">
-          <StockBadge stock={product.stock} />
-          {product.isSeasonal ? (
-            <Badge variant="outline" className="bg-background/90">
-              {sv.product.seasonal}
-            </Badge>
-          ) : null}
-        </div>
       </div>
       <div className="mt-3 flex flex-1 flex-col">
-        <p className="text-xs text-muted-foreground">{product.producer.name}</p>
+        <p className="text-xs text-muted-foreground">
+          {product.producer.name}
+          {product.isSeasonal ? ` · ${sv.product.seasonal}` : null}
+        </p>
         <h3 className="mt-0.5 font-medium leading-snug">
           <Link href={`/produkt/${product.slug}`} className="after:absolute after:inset-0">
             {product.name}
@@ -42,6 +36,7 @@ export function ProductCard({ product }: { product: CatalogProduct }) {
           <span className="font-semibold">{formatSek(product.priceOre)}</span>
           <span className="text-muted-foreground"> · {product.unit}</span>
         </p>
+        <StockStatus stock={product.stock} className="mt-0.5 text-sm" />
       </div>
     </article>
   );

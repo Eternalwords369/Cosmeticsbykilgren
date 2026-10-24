@@ -4,6 +4,8 @@
 
 ## P1
 
+- 2026-10-24 — Byt lösenord i admin (Fas 4), så att det genererade adminlösenordet kan ersättas.
+
 - 2026-10-24 — Byt fiktiva producenter i seed mot riktiga (med godkännande) före lansering.
 - 2026-10-24 — Ersätt platshållarbilder (`public/placeholders/`) med riktiga foton. Lägg till `images.remotePatterns` för Blob/Storage i `next.config.ts`.
 

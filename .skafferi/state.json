@@ -66,7 +66,17 @@
       "phase": 1,
       "decision": "Producenttexter renderas med react-markdown (utan rå HTML)",
       "reason": "Producenterna kan formatera sina berättelser i admin (Fas 4) utan XSS-risk."
+    },
+    {
+      "phase": 1.1,
+      "decision": "Anti-slop-pass: ingen backdrop-blur i headern; statusar (Slutsåld, Få kvar, I lager, Säsong, Skördefest-station) som vanlig text i stället för piller",
+      "reason": "vectorlab anti-slop S3/S4/S8. Kategorichipsen är interaktiva filter och behålls."
+    },
+    {
+      "phase": 1.1,
+      "decision": "Produktionsadmin skapad direkt i databasen (bcrypt, slumpat lösenord) för användarens e-post",
+      "reason": "Ingen lösenordsbyte-funktion finns än; byggs i Fas 4."
     }
   ],
-  "lastUpdated": "2026-10-24T12:40:44.902Z"
+  "lastUpdated": "2026-10-24T14:37:00.166Z"
 }

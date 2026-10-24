@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { CatalogImage } from "@/components/catalog/catalog-image";
-import { Badge } from "@/components/ui/badge";
 import type { CatalogProducer } from "@/lib/catalog";
 import { sv } from "@/lib/copy/sv";
 
@@ -21,14 +20,10 @@ export function ProducerCard({ producer }: { producer: CatalogProducer }) {
           </Link>
         </h3>
         <p className="mt-2 text-muted-foreground">{producer.shortDescription}</p>
-        <div className="mt-auto flex flex-wrap items-center gap-2 pt-4 text-sm">
-          {producer.stationNumber ? (
-            <Badge variant="secondary">{sv.producers.station(producer.stationNumber)}</Badge>
-          ) : null}
-          <span className="text-muted-foreground">
-            {sv.producers.productCount(producer._count.products)}
-          </span>
-        </div>
+        <p className="mt-auto pt-4 text-sm text-muted-foreground">
+          {producer.stationNumber ? `${sv.producers.station(producer.stationNumber)} · ` : null}
+          {sv.producers.productCount(producer._count.products)}
+        </p>
       </div>
     </article>
   );

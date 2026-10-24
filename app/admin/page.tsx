@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { redirect } from "next/navigation";
 import { SignOutButton } from "@/components/admin/sign-out-button";
-import { Badge } from "@/components/ui/badge";
 import { getAdminSession } from "@/lib/auth";
 import { sv } from "@/lib/copy/sv";
 
@@ -27,7 +26,8 @@ async function AdminDashboard() {
     <div className="mt-6 space-y-4">
       <p className="text-lg">{sv.admin.welcome(session.user.name ?? session.user.email ?? "")}</p>
       <p className="text-sm text-muted-foreground">
-        {sv.admin.roleLabel}: <Badge variant="secondary">{sv.admin.roles[session.user.role]}</Badge>
+        {sv.admin.roleLabel}:{" "}
+        <span className="text-foreground">{sv.admin.roles[session.user.role]}</span>
       </p>
       <p className="text-muted-foreground">{sv.admin.dashboardSoon}</p>
       <SignOutButton />
