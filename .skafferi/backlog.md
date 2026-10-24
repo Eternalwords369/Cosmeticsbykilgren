@@ -4,6 +4,7 @@
 
 ## P1
 
+- 2026-10-24 — Lokal leveransrunda en fast veckodag i Säffle och Åmål (Fas 3, tillägg till Click & Collect): ny `FulfillmentType` `LOCAL_DELIVERY`, postnummerkontroll, en leveransdag i kassan, körlista för admin.
 - 2026-10-24 — Byt lösenord i admin (Fas 4), så att det genererade adminlösenordet kan ersättas.
 
 - 2026-10-24 — Byt fiktiva producenter i seed mot riktiga (med godkännande) före lansering.
