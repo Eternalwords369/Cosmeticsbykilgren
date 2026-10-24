@@ -54,11 +54,11 @@ export const sv = {
       },
       {
         title: "Inga dolda avgifter",
-        text: "Fri retur, alltid. Fri frakt över 395 kr. Priset du ser är priset du betalar.",
+        text: "Fri retur, alltid. Fri frakt över 395 kr. Inga avgifter tillkommer i kassan.",
       },
       {
         title: "En människa bakom varje vara",
-        text: "Varje produkt har en producent och en historia. Läs den innan du handlar.",
+        text: "Varje produkt har en producent och en berättelse. Läs den innan du handlar.",
       },
     ],
   },
@@ -86,7 +86,7 @@ export const sv = {
     roles: { ADMIN: "Administratör", PRODUCER: "Producent" },
     signOut: "Logga ut",
     loading: "Hämtar …",
-    dashboardSoon: "Orderhantering och produkter kommer i Fas 4.",
+    dashboardSoon: "Orderhantering och produktredigering kommer snart.",
   },
   shop: {
     title: "Butik",
@@ -121,7 +121,7 @@ export const sv = {
     cartSoon: "Varukorgen öppnar inom kort. Då kan du beställa direkt här.",
     storyTitle: "Berättelsen",
     aboutProducer: (name: string) => `Om ${name}`,
-    readProducerStory: "Läs hela historien",
+    readProducerStory: "Läs hela berättelsen",
     moreFrom: (name: string) => `Mer från ${name}`,
     details: "Fakta",
     unit: "Förpackning",
@@ -134,7 +134,7 @@ export const sv = {
   producers: {
     title: "Producenter",
     intro:
-      "Här är människorna bakom maten. Alla finns på Värmlandsnäs, och flera av dem kan du besöka och hämta din beställning hos.",
+      "Alla producenter finns på Värmlandsnäs. Hos flera av dem kan du hämta din beställning direkt på gården.",
     station: (n: number) => `Station ${n} på Skördefesten`,
     productCount: (count: number) =>
       count === 1 ? "1 vara i butiken" : `${count} varor i butiken`,

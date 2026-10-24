@@ -69,7 +69,7 @@ const producers: SeedProducer[] = [
       {
         slug: "nasgarden-hogrev-1kg",
         name: "Högrev",
-        description: "Hängmörad högrev, perfekt för långkok.",
+        description: "Hängmörad högrev för långkok.",
         category: "kott-chark",
         priceKr: 289,
         vatRate: 12,
@@ -302,7 +302,7 @@ const producers: SeedProducer[] = [
       {
         slug: "ekenas-rodbetor",
         name: "Rödbetor",
-        description: "Mörka och jordiga, perfekta att ugnsrosta.",
+        description: "Mörka och jordiga. Goda att ugnsrosta.",
         category: "gront-rotfrukter",
         priceKr: 39,
         vatRate: 12,
@@ -401,7 +401,7 @@ const producers: SeedProducer[] = [
   {
     slug: "vanerfisk",
     name: "Vänerfisk",
-    shortDescription: "Gös och sik fångad i Vänern, rökt i egen rökeri.",
+    shortDescription: "Gös och sik från Vänern, rökt i eget rökeri.",
     longStory: [
       "Vi lägger näten före gryningen och är tillbaka i hamnen innan frukost.",
       "Fisken rensas samma morgon och röks över al och en i rökeriet bakom bryggan.",
