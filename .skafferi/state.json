@@ -1,6 +1,6 @@
 {
-  "currentPhase": 1,
-  "completedPhases": [0],
+  "currentPhase": 2,
+  "completedPhases": [0, 1],
   "decisions": [
     {
       "phase": 0,
@@ -36,7 +36,37 @@
       "phase": 0,
       "decision": "Seed: fiktiva producenter, admin från SEED_ADMIN_EMAIL/SEED_ADMIN_PASSWORD",
       "reason": "Inga riktiga producenter godkända ännu. Lösenord hårdkodas aldrig."
+    },
+    {
+      "phase": 1,
+      "decision": "Katalogdata via 'use cache' + cacheLife('hours') + cacheTag (products, producers, categories, product:<slug>)",
+      "reason": "Sidorna förrenderas statiskt. Fas 4 (admin) ska anropa revalidateTag med samma taggar efter ändringar."
+    },
+    {
+      "phase": 1,
+      "decision": "Butiksfilter i URL: ?kategori=&producent=&sortera=, validerade med Zod (ogiltiga värden ignoreras)",
+      "reason": "Delbara länkar och fungerande tillbaka-knapp. Kategorier är vanliga länkar och fungerar utan JavaScript."
+    },
+    {
+      "phase": 1,
+      "decision": "Okända produkt- och producent-slugs: första besöket ger 200 med noindex och 404-sidan, senare besök ger 404",
+      "reason": "Next 16 med Partial Prefetching skickar app-skalet innan params är kända, och dynamicParams=false finns inte med Cache Components. Alla riktiga slugs förrenderas via generateStaticParams. Kan ändras med en existenskontroll i proxy.ts om riktig 404 krävs."
+    },
+    {
+      "phase": 1,
+      "decision": "Varm färgpalett (havre, granskog, råg) i globals.css; logga och appikoner",
+      "reason": "Backlog-punkt P2 från Fas 0. Kontrast för muted-foreground hålls på minst 4.5:1."
+    },
+    {
+      "phase": 1,
+      "decision": "Installerbar webbapp: manifest.webmanifest, ikoner 192/512/maskable, apple-icon, theme-color",
+      "reason": "Användaren bad om webbapp. Offline-stöd och service worker ingår inte än."
+    },
+    {
+      "phase": 1,
+      "decision": "Producenttexter renderas med react-markdown (utan rå HTML)",
+      "reason": "Producenterna kan formatera sina berättelser i admin (Fas 4) utan XSS-risk."
     }
   ],
-  "lastUpdated": "2026-10-24T12:35:00Z"
+  "lastUpdated": "2026-10-24T12:40:44.902Z"
 }

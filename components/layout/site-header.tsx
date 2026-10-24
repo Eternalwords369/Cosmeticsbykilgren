@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ShoppingBasket } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -12,9 +13,10 @@ export function SiteHeader() {
         <MobileNav />
         <Link
           href="/"
-          className="font-heading text-lg font-semibold tracking-tight"
+          className="flex items-center gap-2 font-heading text-lg font-semibold tracking-tight"
           aria-label={sv.nav.home}
         >
+          <Image src="/logo.svg" alt="" width={28} height={28} unoptimized />
           {sv.site.name}
         </Link>
         <nav className="ml-6 hidden items-center gap-6 md:flex" aria-label={sv.nav.menu}>
