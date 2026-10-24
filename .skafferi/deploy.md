@@ -6,7 +6,7 @@
 - [x] Migreringar `init` + `enable_rls` körda och registrerade i `_prisma_migrations`
 - [x] Katalogdata (kategorier, producenter, produkter, upphämtningsställen, lådor, kampanj, rabattkod) — inlagd 2026-10-24
 - [ ] Admin-konto (kör `npm run db:seed` med `DATABASE_URL` + `SEED_ADMIN_*`)
-- [ ] Vercel-projekt + produktionsdeploy (användaren importerar repot i Vercels gränssnitt, team AKXA STUDIO)
+- [x] Vercel-projekt `skafferiet` (team AKXA STUDIO), live på https://skafferiet-coral.vercel.app — 18/18 E2E gröna mot produktion 2026-10-24
 
 ## Behövs i miljön (cloud-miljöns inställningar → Edit)
 
@@ -17,7 +17,13 @@
 | `SEED_ADMIN_EMAIL`    | Din admin-e-post                                                              |
 | `SEED_ADMIN_PASSWORD` | Ett starkt lösenord (minst 16 tecken)                                         |
 
-## Steg för nästa session
+## Kvar
+
+- Admin-konto i produktion
+- Ta bort oanvänd Vercel-databas `prisma-postgres-claret-pendant`
+- Rotera Supabase secret key som syntes i en skärmbild
+
+## Steg för nästa session (om token-vägen används)
 
 1. `npm ci` (kör `prisma generate`)
 2. `npx prisma migrate status` — ska säga att databasen är i synk
