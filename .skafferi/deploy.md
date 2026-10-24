@@ -4,8 +4,9 @@
 
 - [x] Supabase-projekt `varmlandsnas-skafferi` (ref `ppfgrvkrssozqconoqme`, eu-north-1, Stockholm)
 - [x] Migreringar `init` + `enable_rls` körda och registrerade i `_prisma_migrations`
-- [ ] Seed-data (kör `npm run db:seed` mot Supabase)
-- [ ] Vercel-projekt + produktionsdeploy
+- [x] Katalogdata (kategorier, producenter, produkter, upphämtningsställen, lådor, kampanj, rabattkod) — inlagd 2026-10-24
+- [ ] Admin-konto (kör `npm run db:seed` med `DATABASE_URL` + `SEED_ADMIN_*`)
+- [ ] Vercel-projekt + produktionsdeploy (användaren importerar repot i Vercels gränssnitt, team AKXA STUDIO)
 
 ## Behövs i miljön (cloud-miljöns inställningar → Edit)
 
