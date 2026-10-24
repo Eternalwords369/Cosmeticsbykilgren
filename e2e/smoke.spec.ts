@@ -16,7 +16,9 @@ test("admin requires login and accepts seeded admin", async ({ page }) => {
   await page.goto("/admin");
   await expect(page).toHaveURL(/\/admin\/login/);
 
-  await page.getByLabel(sv.admin.email).fill("admin@skafferi.local");
+  await page
+    .getByLabel(sv.admin.email)
+    .fill(process.env.SEED_ADMIN_EMAIL ?? "admin@skafferi.local");
   await page.getByLabel(sv.admin.password).fill("fel-losenord");
   await page.getByRole("button", { name: sv.admin.submit }).click();
   await expect(page.getByText(sv.admin.invalidCredentials)).toBeVisible();

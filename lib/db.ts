@@ -5,7 +5,8 @@ import { PrismaClient } from "@/lib/generated/prisma/client";
 const globalForPrisma = globalThis as unknown as { prisma?: PrismaClient };
 
 function createClient() {
-  const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
+  // Small pool per serverless instance; Supabase's session pooler caps total connections.
+  const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL, max: 5 });
   return new PrismaClient({ adapter });
 }
 

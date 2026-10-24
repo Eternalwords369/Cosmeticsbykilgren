@@ -1,12 +1,14 @@
 import { defineConfig, devices } from "@playwright/test";
 
 const port = Number(process.env.PORT ?? 3000);
+// Set PLAYWRIGHT_BASE_URL to run the suite against a deployed site instead of a local build.
+const remoteBaseUrl = process.env.PLAYWRIGHT_BASE_URL;
 
 export default defineConfig({
   testDir: "./e2e",
   fullyParallel: true,
   retries: process.env.CI ? 1 : 0,
-  use: { baseURL: `http://localhost:${port}`, trace: "on-first-retry" },
+  use: { baseURL: remoteBaseUrl ?? `http://localhost:${port}`, trace: "on-first-retry" },
   projects: [
     {
       name: "mobile",
@@ -17,10 +19,12 @@ export default defineConfig({
       use: { ...devices["Desktop Chrome"], viewport: { width: 1280, height: 800 } },
     },
   ],
-  webServer: {
-    command: `npm run start -- -p ${port}`,
-    url: `http://localhost:${port}`,
-    reuseExistingServer: !process.env.CI,
-    timeout: 120_000,
-  },
+  webServer: remoteBaseUrl
+    ? undefined
+    : {
+        command: `npm run start -- -p ${port}`,
+        url: `http://localhost:${port}`,
+        reuseExistingServer: !process.env.CI,
+        timeout: 120_000,
+      },
 });
