@@ -61,6 +61,15 @@ enum PayoutStatus {
   FAILED
 }
 
+enum LeadStage {
+  STARTED
+  PROFILE_DONE
+  SUBMITTED
+  APPROVED
+  DECLINED
+  CLOSED
+}
+
 enum AdminRole {
   ADMIN
   PRODUCER
@@ -401,4 +410,37 @@ model AdminUser {
   producer     Producer? @relation(fields: [producerId], references: [id])
 
   @@index([role])
+}
+
+// A producer on the way in. Self-serve: every step is a form behind a magic link.
+model ProducerLead {
+  id             String      @id @default(cuid())
+  email          String      @unique
+  contactName    String
+  farmName       String
+  sells          String
+  stage          LeadStage   @default(STARTED)
+  stageChangedAt DateTime    @default(now())
+  tokenNonce     String
+  profile        Json?
+  firstProduct   Json?
+  unsubscribedAt DateTime?
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+
+  emails         LeadEmail[]
+
+  @@index([stage])
+}
+
+// Each template goes out at most once per lead.
+model LeadEmail {
+  id       String       @id @default(cuid())
+  leadId   String
+  template String
+  sentAt   DateTime     @default(now())
+
+  lead     ProducerLead @relation(fields: [leadId], references: [id], onDelete: Cascade)
+
+  @@unique([leadId, template])
 }

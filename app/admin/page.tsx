@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { redirect } from "next/navigation";
+import { LeadList } from "@/components/admin/lead-list";
 import { SignOutButton } from "@/components/admin/sign-out-button";
 import { getAdminSession } from "@/lib/auth";
 import { sv } from "@/lib/copy/sv";
@@ -31,6 +32,7 @@ async function AdminDashboard() {
       </p>
       <p className="text-muted-foreground">{sv.admin.dashboardSoon}</p>
       <SignOutButton />
+      {session.user.role === "ADMIN" ? <LeadList /> : null}
     </div>
   );
 }

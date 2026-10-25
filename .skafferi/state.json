@@ -106,7 +106,32 @@
       "phase": 1.2,
       "decision": "ProductDailyStat sparar bara summerade räknare per produkt och dag",
       "reason": "Cookie-fri princip, inga besökardata."
+    },
+    {
+      "phase": 1.3,
+      "decision": "Självbetjänad producentanslutning på /salj-hos-oss utan samtal: anmälan med fyra fält, sedan magisk länk på mejl till stegen Gården → Första varan → Granskning. All kontakt sker via mejl som en människa svarar på (EMAIL_REPLY_TO)",
+      "reason": "Användaren vill att den första betalande kunden (producenten) ska nå köp utan video- eller telefonsamtal."
+    },
+    {
+      "phase": 1.3,
+      "decision": "Säljpsykologi utan mörka mönster: litet första steg (foot-in-the-door), förifylld progress där anmälan räknas som steg 1 av 4, kalkylator med konkreta kronor, nollrisk (ingen fast avgift och ingen bindning), tidsangivelse per steg, ett mejl = ett nästa steg, ärligt sista mejl före stängning, ett exakt svarsdatum. Inga påhittade omdömen, inget falskt antal producenter, ingen falsk brådska",
+      "reason": "Varumärket bygger på ärlig handel, och marknadsföringslagen förbjuder vilseledande påståenden. Socialt bevis läggs till när det finns riktiga producenter."
+    },
+    {
+      "phase": 1.3,
+      "decision": "Mejlsekvens styrd av beteende (lib/onboarding/sequence.ts): påminnelse efter 2 dagar i samma steg, sista mejl efter 6, stängning 7 dagar efter det eller efter 30 dagar utan rörelse. Högst ett mejl per 48 h. Daglig cron 05:30 UTC",
+      "reason": "Producenter läser mejl tidigt på morgonen, och påminnelserna ska handla om det steg de faktiskt står på."
+    },
+    {
+      "phase": 1.3,
+      "decision": "Länkarna är HMAC-signerade (NEXTAUTH_SECRET) över leadId och en nonce per lead. Ny anmälan med samma adress roterar noncen. Svaret är detsamma för nya och kända adresser",
+      "reason": "Varje mejl kan bära länken utan att den lagras i klartext, gamla länkar kan spärras, och formuläret avslöjar inte vem som har anmält sig."
+    },
+    {
+      "phase": 1.3,
+      "decision": "Mejl skickas som ren text via Resend REST (lib/email.ts). Utan RESEND_API_KEY loggas de bara",
+      "reason": "Inga nya beroenden. React Email kan ersätta det i Fas 2 utan att anropen ändras."
     }
   ],
-  "lastUpdated": "2026-10-24T23:59:00Z"
+  "lastUpdated": "2026-10-25T12:00:00Z"
 }
