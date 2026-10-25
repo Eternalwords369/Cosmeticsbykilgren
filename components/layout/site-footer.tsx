@@ -28,6 +28,11 @@ export function SiteFooter() {
               </Link>
             </li>
             <li>
+              <Link href="/salj-hos-oss" className="text-muted-foreground hover:text-foreground">
+                {sv.sell.nav}
+              </Link>
+            </li>
+            <li>
               <Link href="/kontakt" className="text-muted-foreground hover:text-foreground">
                 {sv.footer.contact}
               </Link>
