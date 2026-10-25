@@ -76,7 +76,37 @@
       "phase": 1.1,
       "decision": "Produktionsadmin skapad direkt i databasen (bcrypt, slumpat lösenord) för användarens e-post",
       "reason": "Ingen lösenordsbyte-funktion finns än; byggs i Fas 4."
+    },
+    {
+      "phase": 1.2,
+      "decision": "Prismodell: provision som standard (15 % + 25 % moms på provisionen), valfri Medlem-plan 495 kr/mån + 6 %. Siffrorna finns bara i lib/engine/plans.ts",
+      "reason": "Små och säsongsberoende producenter ska inte ha en fast kostnad innan de säljer. Medlem lönar sig från 5 500 kr i månadsförsäljning. Planrådgivaren föreslår byte bara om den andra planen hade varit billigare alla de senaste tre månaderna och sparar minst 100 kr/mån. Den byter aldrig plan själv."
+    },
+    {
+      "phase": 1.2,
+      "decision": "Plattformen står för frakt och rabattkoder; producenten avräknas alltid på fullt listpris",
+      "reason": "Ärlig handel: en kampanj ska aldrig betalas av producenten utan att den vet om det."
+    },
+    {
+      "phase": 1.2,
+      "decision": "Utbetalning månadsvis för överlämnade ProducerOrder äldre än 14 dagar. En månadsavgift som inte täcks förs över till nästa period i stället för att faktureras",
+      "reason": "Returfönstret måste ha passerat innan pengar lämnar plattformen. Producenten får aldrig en räkning från oss."
+    },
+    {
+      "phase": 1.2,
+      "decision": "Tänkt betalväg: Stripe Connect (producenten är säljare, plattformen tar provision). Kopplas i Fas 2. Momsrollen ska bekräftas av revisor innan live",
+      "reason": "Om plattformen i stället säljer i eget namn (kommissionär) ändras momshanteringen för hela försäljningen."
+    },
+    {
+      "phase": 1.2,
+      "decision": "Lärande delar i lib/engine utan externa ML-beroenden: Holt-prognos med vikter som anpassas om varje körning, Thompson sampling för sorteringen 'Populärt', lift-baserat 'Passar ihop med' mellan olika producenter",
+      "reason": "Fungerar med lite data, är deterministiska och testbara och kan förklaras för en producent. Att lära sig årssäsonger kräver två års data. Priserna sätts aldrig automatiskt, eftersom vi inte konkurrerar på pris."
+    },
+    {
+      "phase": 1.2,
+      "decision": "ProductDailyStat sparar bara summerade räknare per produkt och dag",
+      "reason": "Cookie-fri princip, inga besökardata."
     }
   ],
-  "lastUpdated": "2026-10-24T14:37:00.166Z"
+  "lastUpdated": "2026-10-24T23:59:00Z"
 }

@@ -42,6 +42,25 @@ enum DiscountType {
   FIXED
 }
 
+enum PricingPlan {
+  COMMISSION
+  MEMBER
+}
+
+enum ProducerOrderStatus {
+  PENDING
+  PREPARING
+  READY
+  HANDED_OVER
+  CANCELLED
+}
+
+enum PayoutStatus {
+  PENDING
+  PAID
+  FAILED
+}
+
 enum AdminRole {
   ADMIN
   PRODUCER
@@ -64,12 +83,17 @@ model Producer {
   isActive            Boolean        @default(true)
   isSkordefestStation Boolean        @default(false)
   stationNumber       Int?
+  pricingPlan         PricingPlan @default(COMMISSION)
+  stripeAccountId     String?     @unique
+  payoutCarryOverOre  Int         @default(0)
   createdAt           DateTime       @default(now())
   updatedAt           DateTime       @updatedAt
 
   products            Product[]
   pickupLocations     PickupLocation[]
   adminUsers          AdminUser[]
+  producerOrders  ProducerOrder[]
+  payouts         Payout[]
 
   @@index([isActive])
   @@index([isSkordefestStation])
@@ -109,6 +133,7 @@ model Product {
   orderItems             OrderItem[]
   campaignProducts       CampaignProduct[]
   preOrderItems          PreOrderItem[]
+  dailyStats       ProductDailyStat[]
 
   @@index([isActive, categoryId])
   @@index([producerId])
@@ -157,6 +182,7 @@ model Order {
 
   pickupLocation   PickupLocation? @relation(fields: [pickupLocationId], references: [id])
   items            OrderItem[]
+  producerOrders ProducerOrder[]
 
   @@index([status])
   @@index([customerEmail])
@@ -175,6 +201,69 @@ model OrderItem {
   product         Product  @relation(fields: [productId], references: [id])
 
   @@index([orderId])
+}
+
+// One producer's part of a customer order: what to prepare and what they are owed.
+model ProducerOrder {
+  id               String              @id @default(cuid())
+  orderId          String
+  producerId       String
+  pricingPlan      PricingPlan
+  grossOre         Int
+  vatOre           Int
+  commissionOre    Int
+  commissionVatOre Int
+  payoutOre        Int
+  status           ProducerOrderStatus @default(PENDING)
+  payoutId         String?
+  createdAt        DateTime            @default(now())
+  updatedAt        DateTime            @updatedAt
+
+  order    Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  producer Producer @relation(fields: [producerId], references: [id])
+  payout   Payout?  @relation(fields: [payoutId], references: [id])
+
+  @@unique([orderId, producerId])
+  @@index([producerId, status])
+  @@index([payoutId])
+}
+
+model Payout {
+  id               String       @id @default(cuid())
+  producerId       String
+  periodStart      DateTime
+  periodEnd        DateTime
+  grossOre         Int
+  commissionOre    Int
+  commissionVatOre Int
+  monthlyFeeOre    Int
+  monthlyFeeVatOre Int
+  netOre           Int
+  carryOverOre     Int
+  status           PayoutStatus @default(PENDING)
+  stripeTransferId String?      @unique
+  createdAt        DateTime     @default(now())
+
+  producer       Producer        @relation(fields: [producerId], references: [id])
+  producerOrders ProducerOrder[]
+
+  @@unique([producerId, periodStart])
+  @@index([status])
+}
+
+// Aggregated counts only, no visitor data. Feeds forecast and ranking.
+model ProductDailyStat {
+  id        String   @id @default(cuid())
+  productId String
+  day       DateTime @db.Date
+  views     Int      @default(0)
+  purchases Int      @default(0)
+  unitsSold Int      @default(0)
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([productId, day])
+  @@index([day])
 }
 
 model SubscriptionBox {
